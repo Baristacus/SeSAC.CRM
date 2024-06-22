@@ -1,0 +1,25 @@
+# macOS
+DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VS Code
+.vscode/
+.vscode-test/
+.history/
+*.code-workspace
