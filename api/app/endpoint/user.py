@@ -1,6 +1,6 @@
 from flask import request
 from flask_restful import Resource
-from app.models import User
+from app.models import User, Order
 
 
 class UserList(Resource):
@@ -30,12 +30,12 @@ class UserList(Resource):
 
         return [
             {
-                "id": user.Id,
-                "name": user.Name,
-                "gender": user.Gender,
-                "birthday": user.Birthday,
-                "age": user.Age,
-                "address": user.Address,
+                "Id": user.Id,
+                "Name": user.Name,
+                "Gender": user.Gender,
+                "Birthday": user.Birthday,
+                "Age": user.Age,
+                "Address": user.Address,
                 "total_count": pagenation.total,
                 "current_page": pagenation.page,
                 "per_page": pagenation.per_page,
@@ -52,6 +52,7 @@ class UserList(Resource):
 class UserDetail(Resource):
     def get(self, user_id):
         user = User.query.get(user_id)
+        orders = Order.query.filter(Order.UserId == user_id).all()
         if user:
             return {
                 "Id": user.Id,
@@ -60,6 +61,15 @@ class UserDetail(Resource):
                 "Birthday": user.Birthday,
                 "Age": user.Age,
                 "Address": user.Address,
+                "Orders": [
+                    {
+                        "Id": order.Id,
+                        "OrderAt": order.OrderAt,
+                        "StoreId": order.StoreId,
+                        "UserId": order.UserId,
+                    }
+                    for order in orders
+                ],
             }
         else:
             return {"message": "사용자를 찾을 수 없습니다."}, 404
