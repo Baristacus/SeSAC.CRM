@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SeSAC CRM Project">
+    <meta name="keywords" content="sesac, crm, project, flask">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/Bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='SeSAC.css') }}">
+    <title>Document</title>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <div class="py-5">
+        <div class="container py-4">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <nav class="navbar fixed-bottom bg-body-tertiary">
+        <div class="container-fluid">
+            <span class="navbar-text">Customer Relationship Management</span>
+        </div>
+    </nav>
+    <script src="{{ url_for('static', filename='Bootstrap/bootstrap.min.js') }}"></script>
+</body>
+
+</html>
