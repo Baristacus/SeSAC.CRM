@@ -1,54 +1,70 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>User List</h1>
-<p>CRM Project User List Page</p>
-
-<ul>
-    {% for users in user_list.items %}
-    <li>{{ users }}</li>
-    {% endfor %}
-</ul>
-
-<!-- 페이징처리 시작 -->
-<ul class="pagination justify-content-center">
-    <!-- 이전페이지 -->
-    {% if user_list.has_prev %}
-    <li class="page-item">
-        <a class="page-link" href="?page={{ user_list.prev_num }}">이전</a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-    </li>
-    {% endif %}
-    <!-- 페이지번호 -->
-    {% for page_num in user_list.iter_pages() %}
-    {% if page_num %}
-    {% if page_num != user_list.page %}
-    <li class="page-item">
-        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
-    </li>
-    {% else %}
-    <li class="page-item active" aria-current="page">
-        <a class="page-link" href="#">{{ page_num }}</a>
-    </li>
-    {% endif %}
-    {% else %}
-    <li class="disabled">
-        <a class="page-link" href="#">...</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-    <!-- 다음페이지 -->
-    {% if user_list.has_next %}
-    <li class="page-item">
-        <a class="page-link" href="?page={{ user_list.next_num }}">다음</a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-    </li>
-    {% endif %}
-</ul>
-<!-- 페이징처리 끝 -->
+    <h1>전체 회원 리스트</h1>
+    <div class="card my-3">
+        <div class="card-header">총 회원수: {{ user_total }}명</div>
+        <ul class="list-group list-group-flush">
+            {% for users in user_list.items %}
+                <a href="{{ url_for('user.get_user', id=users.Id) }}"
+                   class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
+                   aria-current="true">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{ users.Name }}</div>
+                        {{ users.Address }}
+                    </div>
+                    {% if users.Gender == "남" %}
+                        <span class="badge bg-primary">{{ users.Gender }} ({{ users.Age }})</span>
+                    {% else %}
+                        <span class="badge bg-danger">{{ users.Gender }} ({{ users.Age }})</span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if user_list.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ user_list.prev_num }}"><i class="bi bi-caret-left-fill"></i></a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#"><i class="bi bi-caret-left"></i></a>
+            </li>
+        {% endif %}
+        <!-- 페이지번호 -->
+        {% for page_num in user_list.iter_pages() %}
+            {% if page_num %}
+                {% if page_num == user_list.page %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">{{ page_num }}</a>
+                    </li>
+                {% elif page_num == 1 or page_num == user_list.pages or (page_num >= user_list.page - 2 and page_num <= user_list.page + 2) %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                    </li>
+                {% elif (page_num == user_list.page - 3 and user_list.page > 3) or (page_num == user_list.page + 3 and user_list.page < user_list.pages - 3) %}
+                    <li class="disabled">
+                        <a class="page-link" href="#">...</a>
+                    </li>
+                {% endif %}
+            {% else %}
+                <li class="disabled">
+                    <a class="page-link" href="#">...</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if user_list.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ user_list.next_num }}"><i class="bi bi-caret-right-fill"></i></a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#"><i class="bi bi-caret-right"></i></a>
+            </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
 {% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>
+        <strong>{{ user.Name }}</strong>님의 상세정보
+    </h1>
+    <div class="card my-3">
+        <div class="card-header">기본정보</div>
+        <div class="card-body">
+            <dl class="row my-2">
+                <dt class="col-sm-1">이름</dt>
+                <dd class="col-sm-11">
+                    {{ user.Name }}
+                </dd>
+                <dt class="col-sm-1">성별</dt>
+                <dd class="col-sm-11">
+                    {{ user.Gender }}
+                </dd>
+                <dt class="col-sm-1">나이</dt>
+                <dd class="col-sm-11">
+                    {{ user.Age }}
+                </dd>
+                <dt class="col-sm-1">생일</dt>
+                <dd class="col-sm-11">
+                    {{ user.Birthday|date }}
+                </dd>
+                <dt class="col-sm-1">주소</dt>
+                <dd class="col-sm-11">
+                    {{ user.Address }}
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="card my-3">
+        <div class="card-header">
+            주문내역 (총 <strong>{{ order_list|count }}</strong>건)
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for order in order_list %}
+                <a href="/"
+                   class="list-group-item list-group-item-action"
+                   aria-current="true">
+                    <div class="fw-bold">{{ order.Id }} - {{ order.OrderAt|datetime }}</div>
+                </a>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -7,8 +7,14 @@
     <meta name="description" content="SeSAC CRM Project">
     <meta name="keywords" content="sesac, crm, project, flask">
     <link rel="stylesheet" href="{{ url_for('static', filename='/Bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/Bootstrap/icon/bootstrap-icons.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='SeSAC.css') }}">
-    <title>Document</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    {% if title %}
+    <title>{{ title }} - SeSAC CRM Project</title>
+    {% else %}
+    <title>SeSAC CRM Project</title>
+    {% endif %}
 </head>
 
 <body>
