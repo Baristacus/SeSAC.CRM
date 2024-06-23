@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, url_for, redirect
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
-from crm.models import User, Order, OrderItem, Item
+from crm.models import User, Order, Store, OrderItem, Item
 
 
 @bp.route("/")
@@ -45,9 +45,21 @@ def get_user(id):
         Order.query.filter(Order.UserId == id).order_by(Order.OrderAt.desc()).all()
     )
 
+    store_list = (
+        Store.query.join(Order, Store.Id == Order.StoreId)
+        .filter(Order.UserId == id)
+        .all()
+    )
+
+    order_list_all = order_list + store_list
+
+    print(order_list_all)
+
     return render_template(
         "user/user_detail.html",
         title=f"{user.Name}님의 회원 정보",
         user=user,
         order_list=order_list,
+        store_list=store_list,
+        order_list_all=order_list_all,
     )
