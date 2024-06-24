@@ -4,7 +4,7 @@
         <strong>{{ user.Name }}</strong>님의 상세정보
     </h1>
     <div class="card my-3">
-        <div class="card-header">기본정보</div>
+        <div class="card-header">기본정보(UUID: {{ user.Id }})</div>
         <div class="card-body">
             <dl class="row my-2">
                 <dt class="col-sm-1">이름</dt>
@@ -35,12 +35,43 @@
             주문내역 (총 <strong>{{ order_list|count }}</strong>건)
         </div>
         <ul class="list-group list-group-flush">
-            {% for order in order_list %}
+            {% for store in order_list %}
                 <a href="/"
-                   class="list-group-item list-group-item-action"
+                   class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
                    aria-current="true">
-                    <div class="fw-bold">{{ order.Id }} - {{ order.OrderAt|datetime }}</div>
+                    <div class="ms-2 me-auto">
+                        <strong>{{ store.Name }}</strong> - {{ store.Type }}
+                    </div>
+                    <span>{{ store.OrderAt|datetime }}</span>
                 </a>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="card my-3">
+        <div class="card-header">자주 방문한 매장 TOP 5</div>
+        <ul class="list-group list-group-flush">
+            {% for top in store_top5 %}
+                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
+                    aria-current="true">
+                    <div class="ms-2 me-auto">
+                        <strong>{{ top.Name }}</strong> - {{ top.Type }}
+                    </div>
+                    <span>{{ top.visit_count }}회 방문</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="card my-3">
+        <div class="card-header">자주 주문한 상품 TOP 5</div>
+        <ul class="list-group list-group-flush">
+            {% for top in item_top5_count %}
+                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
+                    aria-current="true">
+                    <div class="ms-2 me-auto">
+                        <strong>{{ top.Name }}</strong> - 카테고리
+                    </div>
+                    <span>00회 주문</span>
+                </li>
             {% endfor %}
         </ul>
     </div>

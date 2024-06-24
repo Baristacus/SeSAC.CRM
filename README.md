@@ -5,4 +5,5 @@
 1. 파이썬 가상환경 생성
 2. `pip install -r requirements.txt`를 입력하여 패키지 설치
 3. `flask run --debug` or `python app.py`를 입력하여 실행
+    - `flask run --debug --host=0.0.0.0`
 4. (option) `export FLASK_DEBUG=true`, `export FLASK_APP=app.py`
