@@ -10,9 +10,9 @@ def get_users():
     page = request.args.get("page", 1, type=int)
     per_page = request.args.get("per_page", 10, type=int)
 
-    name = request.form.get("name")
-    gender = request.form.get("gender")
-    age = request.form.get("age")
+    name = request.args.get("name")
+    gender = request.args.get("gender")
+    age = request.args.get("age")
 
     user_list = User.query.paginate(page=page, per_page=per_page)
     user_total = User.query.count()
