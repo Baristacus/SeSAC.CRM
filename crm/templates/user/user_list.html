@@ -53,10 +53,6 @@
             <li class="page-item">
                 <a class="page-link" href="?page={{ user_list.prev_num }}"><i class="bi bi-caret-left-fill"></i></a>
             </li>
-        {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" tabindex="-1" aria-disabled="true" href="#"><i class="bi bi-caret-left"></i></a>
-            </li>
         {% endif %}
         <!-- 페이지번호 -->
         {% for page_num in user_list.iter_pages() %}
@@ -86,10 +82,6 @@
         {% if user_list.has_next %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ user_list.next_num }}"><i class="bi bi-caret-right-fill"></i></a>
-            </li>
-        {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" tabindex="-1" aria-disabled="true" href="#"><i class="bi bi-caret-right"></i></a>
             </li>
         {% endif %}
     </ul>

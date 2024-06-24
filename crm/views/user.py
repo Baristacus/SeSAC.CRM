@@ -85,10 +85,24 @@ def get_user(id):
 
     # 자주 주문한 상품 TOP5
 
+    item_top5 = (
+        Item.query.join(OrderItem, Item.Id == OrderItem.ItemId)
+        .join(Order, Order.Id == OrderItem.OrderId)
+        .filter(Order.UserId == id)
+        .add_columns(
+            Item.Name, Item.Type, func.count(OrderItem.ItemId).label("order_count")
+        )
+        .group_by(Item.Id)
+        .order_by(func.count(OrderItem.ItemId).desc())
+        .limit(5)
+        .all()
+    )
+
     return render_template(
         "user/user_detail.html",
         title=f"{user.Name}님의 회원 정보",
         user=user,
         order_list=order_list,
         store_top5=store_top5_visit,
+        item_top5=item_top5,
     )

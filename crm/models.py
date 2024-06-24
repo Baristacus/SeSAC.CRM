@@ -44,6 +44,7 @@ class Order(db.Model):
 
 
 class OrderItem(db.Model):
+    __tablename__ = "OrderItem"
     Id = db.Column(db.Text, primary_key=True)
     OrderId = db.Column(db.Text, nullable=False)
     ItemId = db.Column(db.Text, nullable=False)
