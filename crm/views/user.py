@@ -10,9 +10,9 @@ def get_users():
     page = request.args.get("page", 1, type=int)
     per_page = request.args.get("per_page", 10, type=int)
 
-    name = request.args.get("name")
-    gender = request.args.get("gender")
-    age = request.args.get("age")
+    name = request.form.get("name")
+    gender = request.form.get("gender")
+    age = request.form.get("age")
 
     user_list = User.query.paginate(page=page, per_page=per_page)
     user_total = User.query.count()
@@ -42,6 +42,8 @@ def get_users():
 def get_user(id):
     user = User.query.get(id)
 
+    # 주문 내역
+
     order_list = (
         Store.query.join(Order, Store.Id == Order.StoreId)
         .add_columns(Store.Name, Store.Type, Order.OrderAt)
@@ -67,6 +69,8 @@ def get_user(id):
         .all()
     )
 
+    # 자주 방문한 매장 TOP5
+
     store_top5_visit = (
         Store.query.join(Order, Store.Id == Order.StoreId)
         .filter(Order.UserId == id)
@@ -79,20 +83,7 @@ def get_user(id):
         .all()
     )
 
-    item_top5_count = (
-        OrderItem.query.join(Item, OrderItem.ItemId == Item.Id)
-        .join(Order, OrderItem.OrderId == Order.Id)
-        .filter(Order.UserId == id)
-        .add_columns(
-            Item.Name, Item.Type, func.count(OrderItem.ItemId).label("item_count")
-        )
-        .group_by(OrderItem.ItemId)
-        .order_by(func.count(OrderItem.ItemId).desc())
-        .limit(5)
-        .all()
-    )
-
-    print(item_top5_count)
+    # 자주 주문한 상품 TOP5
 
     return render_template(
         "user/user_detail.html",
@@ -100,5 +91,4 @@ def get_user(id):
         user=user,
         order_list=order_list,
         store_top5=store_top5_visit,
-        item_top5_count=item_top5_count,
     )

@@ -30,5 +30,7 @@
             </div>
         </nav>
         <script src="{{ url_for('static', filename='Bootstrap/bootstrap.min.js') }}"></script>
+        {% block script %}
+        {% endblock script %}
     </body>
 </html>

@@ -1,6 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>전체 회원 리스트</h1>
+    <hr>
+    <form action="/user/" class="row g-3 align-items-right">
+        <div class="col-3">
+            <input type="text"
+                   class="form-control"
+                   id="name"
+                   name="name"
+                   placeholder="이름">
+        </div>
+        <div class="col-3">
+            <input type="text" class="form-control" id="age" name="age" placeholder="나이">
+        </div>
+        <div class="col-3">
+            <select id="gender" name="gender" class="form-select">
+                <option selected hidden>성별</option>
+                <option value="">전체</option>
+                <option>남</option>
+                <option>여</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">검색</button>
+        </div>
+    </form>
+    <hr>
     <div class="card my-3">
         <div class="card-header">총 회원수: {{ user_total }}명</div>
         <ul class="list-group list-group-flush">
@@ -40,11 +65,13 @@
                     <li class="page-item active" aria-current="page">
                         <a class="page-link" href="#">{{ page_num }}</a>
                     </li>
-                {% elif page_num == 1 or page_num == user_list.pages or (page_num >= user_list.page - 2 and page_num <= user_list.page + 2) %}
+                {% elif page_num == 1 or page_num == user_list.pages or (page_num >= user_list.page - 2 and page_num <=
+                    user_list.page + 2) %}
                     <li class="page-item">
                         <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
                     </li>
-                {% elif (page_num == user_list.page - 3 and user_list.page > 3) or (page_num == user_list.page + 3 and user_list.page < user_list.pages - 3) %}
+                {% elif (page_num == user_list.page - 3 and user_list.page > 3) or (page_num == user_list.page + 3 and
+                    user_list.page < user_list.pages - 3) %}
                     <li class="disabled">
                         <a class="page-link" href="#">...</a>
                     </li>
