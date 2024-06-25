@@ -53,7 +53,8 @@
         <!-- 이전페이지 -->
         {% if user_list.has_prev %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ user_list.prev_num }}"><i class="bi bi-caret-left-fill"></i></a>
+                <a class="page-link"
+                   href="?page={{ user_list.prev_num }}&name={{ name or '' }}&gender={{ gender or '' }}&age={{ age or '' }}"><i class="bi bi-caret-left-fill"></i></a>
             </li>
         {% endif %}
         <!-- 페이지번호 -->
@@ -66,7 +67,8 @@
                 {% elif page_num == 1 or page_num == user_list.pages or (page_num >= user_list.page - 2 and page_num <=
                     user_list.page + 2) %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                        <a class="page-link"
+                           href="?page={{ page_num }}&name={{ name or '' }}&gender={{ gender or '' }}&age={{ age or '' }}">{{ page_num }}</a>
                     </li>
                 {% elif (page_num == user_list.page - 3 and user_list.page > 3) or (page_num == user_list.page + 3 and
                     user_list.page < user_list.pages - 3) %}
@@ -83,7 +85,8 @@
         <!-- 다음페이지 -->
         {% if user_list.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ user_list.next_num }}"><i class="bi bi-caret-right-fill"></i></a>
+                <a class="page-link"
+                   href="?page={{ user_list.next_num }}&name={{ name or '' }}&gender={{ gender or '' }}&age={{ age or '' }}"><i class="bi bi-caret-right-fill"></i></a>
             </li>
         {% endif %}
     </ul>

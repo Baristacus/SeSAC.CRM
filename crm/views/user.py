@@ -35,6 +35,9 @@ def get_users():
         title="전체 회원 목록",
         user_list=user_list,
         user_total=user_total,
+        name=name,
+        gender=gender,
+        age=age,
     )
 
 
