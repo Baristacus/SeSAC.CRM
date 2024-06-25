@@ -13,8 +13,12 @@ def get_orders():
     order_list = Order.query.paginate(page=page, per_page=per_page)
     order_total = Order.query.count()
 
-    # orders.UserId -> User.Name
-    # orders.StoreId -> Store.Name
+    # 이게 왜 되는거지? ㅡ..ㅡ; 스스로에게 값을 추가?
+    for order in order_list.items:
+        user = User.query.get(order.UserId)
+        store = Store.query.get(order.StoreId)
+        order.UserName = user.Name
+        order.StoreName = store.Name
 
     return render_template(
         "order/order_list.html",

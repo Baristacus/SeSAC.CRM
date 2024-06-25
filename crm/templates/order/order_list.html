@@ -11,10 +11,10 @@
                    aria-current="true">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">
-                            [ <span class="text-primary">{{ orders.UserId }}</span> ] {{ orders.OrderAt|datetime }}
+                            [ <span class="text-primary">{{ orders.StoreName }}</span> ] {{ orders.UserName }}
                         </div>
                     </div>
-                    <span class="badge bg-danger">{{ orders.StoreId }}</span>
+                    <span class="badge bg-primary">{{ orders.OrderAt|datetime }}</span>
                 </a>
             {% endfor %}
         </ul>
