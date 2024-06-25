@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for, redirect
+from flask import Blueprint, render_template, request
 from sqlalchemy import func
 from crm.models import User, Order, Store, Item, OrderItem
 
