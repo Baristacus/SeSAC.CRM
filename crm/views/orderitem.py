@@ -15,7 +15,7 @@ def get_orderitems():
 
     return render_template(
         "orderitem/orderitem_list.html",
-        title="주문 상세 내역 목록",
+        title="주문 상세 내역",
         orderitem_list=orderitem_list,
         orderitem_total=orderitem_total,
     )

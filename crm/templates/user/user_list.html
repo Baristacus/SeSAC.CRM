@@ -8,14 +8,18 @@
                    class="form-control"
                    id="name"
                    name="name"
-                   placeholder="이름">
+                   placeholder="{{ name or '이름' }}">
         </div>
         <div class="col-3">
-            <input type="text" class="form-control" id="age" name="age" placeholder="나이">
+            <input type="text"
+                   class="form-control"
+                   id="age"
+                   name="age"
+                   placeholder="{{ age or '나이' }}">
         </div>
         <div class="col-3">
             <select id="gender" name="gender" class="form-select">
-                <option selected hidden value="">성별</option>
+                <option selected hidden value="{{ gender or '' }}">{{ gender or '성별' }}</option>
                 <option value="">전체</option>
                 <option>남</option>
                 <option>여</option>
