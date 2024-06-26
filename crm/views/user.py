@@ -31,7 +31,7 @@ def get_users():
         )
 
     return render_template(
-        "user/user_list.html",
+        "user/user_list.jinja2",
         title="전체 회원 목록",
         user_list=user_list,
         user_total=user_total,
@@ -102,7 +102,7 @@ def get_user(id):
     )
 
     return render_template(
-        "user/user_detail.html",
+        "user/user_detail.jinja2",
         title=f"{user.Name}님의 회원 정보",
         user=user,
         order_list=order_list,

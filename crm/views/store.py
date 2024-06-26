@@ -14,7 +14,7 @@ def get_stores():
     store_total = Store.query.count()
 
     return render_template(
-        "store/store_list.html",
+        "store/store_list.jinja2",
         title="전체 상점 목록",
         store_list=store_list,
         store_total=store_total,
@@ -30,7 +30,7 @@ def get_store(id):
     # 단골 고객 가져오기
 
     return render_template(
-        "store/store_detail.html",
+        "store/store_detail.jinja2",
         title="상점 상세 정보",
         store=store,
     )

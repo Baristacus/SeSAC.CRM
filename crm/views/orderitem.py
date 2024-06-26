@@ -14,7 +14,7 @@ def get_orderitems():
     orderitem_total = OrderItem.query.count()
 
     return render_template(
-        "orderitem/orderitem_list.html",
+        "orderitem/orderitem_list.jinja2",
         title="주문 상세 내역",
         orderitem_list=orderitem_list,
         orderitem_total=orderitem_total,

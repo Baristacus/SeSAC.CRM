@@ -24,7 +24,7 @@ def get_orders():
         order.StoreType = store.Type
 
     return render_template(
-        "order/order_list.html",
+        "order/order_list.jinja2",
         title="전체 주문 목록",
         order_list=order_list,
         order_total=order_total,
@@ -36,7 +36,7 @@ def get_order(id):
     order = Order.query.get(id)
 
     return render_template(
-        "order/order_detail.html",
+        "order/order_detail.jinja2",
         title="주문 상세 정보",
         order=order,
     )

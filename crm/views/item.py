@@ -14,7 +14,7 @@ def get_items():
     item_total = Item.query.count()
 
     return render_template(
-        "item/item_list.html",
+        "item/item_list.jinja2",
         title="전체 상품 목록",
         item_list=item_list,
         item_total=item_total,
@@ -30,7 +30,7 @@ def get_item(id):
     # 월간 매출액 그래프
 
     return render_template(
-        "item/item_detail.html",
+        "item/item_detail.jinja2",
         title="상품 상세 정보",
         item=item,
     )
