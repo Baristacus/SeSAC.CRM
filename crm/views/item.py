@@ -19,3 +19,18 @@ def get_items():
         item_list=item_list,
         item_total=item_total,
     )
+
+
+@bp.route("/<id>")
+def get_item(id):
+    item = Item.query.get(id)
+
+    # 월간 매출액 가져오기
+
+    # 월간 매출액 그래프
+
+    return render_template(
+        "item/item_detail.html",
+        title="상품 상세 정보",
+        item=item,
+    )

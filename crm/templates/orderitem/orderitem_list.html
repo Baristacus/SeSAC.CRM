@@ -9,8 +9,10 @@
                 <li class="list-group-item list-group-item-action" aria-current="true">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">
-                            [ <span class="text-primary">OrderId: <a href="#" class="text-decoration-none">{{ orderitems.OrderId }}</a></span> ]
-                            [ <span class="text-secondary">ItemId: <a href="#" class="text-decoration-none">{{ orderitems.ItemId }}</a></span> ]
+                            주문내역: [ <span class="text-primary"><a href="{{ url_for('order.get_order', id=orderitems.OrderId) }}"
+   class="text-decoration-none">{{ orderitems.OrderId }}</a></span> ]
+                            <span class="ms-3">주문상품:</span> [ <span class="text-info"><a href="{{ url_for('item.get_item', id=orderitems.ItemId) }}"
+   class="text-decoration-none">{{ orderitems.ItemId }}</a></span> ]
                         </div>
                     </div>
                 </li>

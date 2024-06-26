@@ -6,7 +6,7 @@
         <div class="card-header">총 상품: {{ item_total }}개</div>
         <ul class="list-group list-group-flush">
             {% for items in item_list %}
-                <a href="#"
+                <a href="{{ url_for('item.get_item', id=items.Id) }}"
                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
                    aria-current="true">
                     <div class="ms-2 me-auto">

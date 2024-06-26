@@ -19,3 +19,18 @@ def get_stores():
         store_list=store_list,
         store_total=store_total,
     )
+
+
+@bp.route("/<id>")
+def get_store(id):
+    store = Store.query.get(id)
+
+    # 월간 매출액 가져오기
+
+    # 단골 고객 가져오기
+
+    return render_template(
+        "store/store_detail.html",
+        title="상점 상세 정보",
+        store=store,
+    )

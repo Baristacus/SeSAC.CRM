@@ -6,15 +6,15 @@
         <div class="card-header">총 주문: {{ order_total }}개</div>
         <ul class="list-group list-group-flush">
             {% for orders in order_list %}
-                <a href="#"
+                <a href="{{ url_for('order.get_order', id=orders.Id) }}"
                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
                    aria-current="true">
                     <div class="ms-2 me-auto">
-                        <div class="fw-bold">
-                            [ <span class="text-primary">{{ orders.StoreName }}</span> ] {{ orders.UserName }}
+                        <div>
+                            [ <span class="text-primary fw-bold">{{ orders.StoreName }}</span> ] {{ orders.StoreType }}
                         </div>
                     </div>
-                    <span class="badge bg-primary">{{ orders.OrderAt|datetime }}</span>
+                    <span>{{ orders.OrderAt|datetime }}</span>
                 </a>
             {% endfor %}
         </ul>
