@@ -39,7 +39,7 @@
         {% for sale in sales %}
         <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-                {{ sale.Month }} (주문 수: {{ sale.OrderCount }}건)
+                <span class="fw-bold">{{ sale.Month }}</span> (주문 수: {{ sale.OrderCount }}건)
             </div>
             <div>₩ {{ '{:,}'.format(sale.MonthlySales) }}</div>
         </li>
@@ -49,7 +49,13 @@
 <div class="card border-primary my-3">
     <div class="card-header">단골 고객</div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item list-group-item-action"></li>
+        {% for vip in vip_users %}
+        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto"><a href="{{ url_for('user.get_user', id=vip.User.Id) }}"
+                    class="text-primary fw-bold text-decoration-none">{{ vip.Name }}</a></div>
+            <div>{{ vip.OrderCount }}회 주문</div>
+        </li>
+        {% endfor %}
     </ul>
 </div>
 {% endblock %}

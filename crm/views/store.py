@@ -28,7 +28,7 @@ def get_store(id):
 
     # ! 월간 매출액 가져오기
     # ? 1. Order 테이블과 OrderItem 테이블을 조인하여 Item 테이블의 UnitPrice를 가져온다.
-    # ? 2. 이를 Order 테이블의 OrderAt 컬럼을 기준으로 그룹핑하여 월간 매출액과 주문수 리스트를 가져온다.
+    # ? 2. 이를 Order 테이블의 OrderAt 컬럼을 기준으로 월간 매출액과 주문수 리스트를 가져온다.
 
     sales = (
         Order.query.join(OrderItem, Order.Id == OrderItem.OrderId)
@@ -48,10 +48,23 @@ def get_store(id):
 
     # ! 단골 고객 가져오기
 
+    vip_users = (
+        User.query.join(Order, User.Id == Order.UserId)
+        .add_columns(User.Name, func.count(Order.Id).label("OrderCount"))
+        .filter(Order.StoreId == id)
+        .group_by(User.Id)
+        .order_by(func.count(Order.Id).desc())
+        .limit(5)
+        .all()
+    )
+
+    print(vip_users)
+
     return render_template(
         "store/store_detail.jinja2",
         title="상점 상세 정보",
         store=store,
         sales=sales,
         total_sales=total_sales,
+        vip_users=vip_users,
     )
