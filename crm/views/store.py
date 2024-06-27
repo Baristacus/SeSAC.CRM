@@ -58,8 +58,6 @@ def get_store(id):
         .all()
     )
 
-    print(vip_users)
-
     return render_template(
         "store/store_detail.jinja2",
         title="상점 상세 정보",

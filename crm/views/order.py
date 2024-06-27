@@ -15,7 +15,7 @@ def get_orders():
     )
     order_total = Order.query.count()
 
-    # 이게 왜 되는거지? ㅡ..ㅡ; 스스로에게 값을 추가?
+    # ? 이게 왜 되는거지? ㅡ..ㅡ; 스스로에게 값을 추가?
     for order in order_list.items:
         user = User.query.get(order.UserId)
         store = Store.query.get(order.StoreId)
@@ -35,8 +35,18 @@ def get_orders():
 def get_order(id):
     order = Order.query.get(id)
 
+    # ! 해당 id에 대한 주문 상세 정보 가져오기
+    order_detail = (
+        Order.query.join(OrderItem, Order.Id == OrderItem.OrderId)
+        .join(Item, OrderItem.ItemId == Item.Id)
+        .add_columns(Item.Name, Item.UnitPrice)
+        .filter(Order.Id == id)
+        .all()
+    )
+
     return render_template(
         "order/order_detail.jinja2",
         title="주문 상세 정보",
         order=order,
+        order_detail=order_detail,
     )
