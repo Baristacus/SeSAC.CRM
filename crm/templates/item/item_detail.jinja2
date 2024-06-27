@@ -4,4 +4,38 @@
     <strong>{{ item.Name }}</strong> 상세정보
 </h1>
 <hr>
+<div class="card border-success my-3">
+    <div class="card-header">기본정보 (UUID: {{ item.Id }})</div>
+    <div class="card-body">
+        <dl class="row my-2">
+            <dt class="col-sm-2">메뉴명</dt>
+            <dd class="col-sm-10">
+                {{ item.Name }}
+            </dd>
+            <dt class="col-sm-2">카테고리</dt>
+            <dd class="col-sm-10">
+                {{ item.Type }}
+            </dd>
+            <dt class="col-sm-2">단가</dt>
+            <dd class="col-sm-10">
+                ₩ {{ '{:,}'.format(item.UnitPrice) }}
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="card border-primary my-3">
+    <div class="card-header">
+        월간 매출액
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for sale in sales %}
+        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <span class="fw-bold">{{ sale.Month }}</span> (주문 수: {{ sale.OrderCount }}건)
+            </div>
+            <div>₩ {{ '{:,}'.format(sale.MonthlySales) }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

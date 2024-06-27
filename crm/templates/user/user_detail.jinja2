@@ -36,38 +36,44 @@
     </div>
     <ul class="list-group list-group-flush">
         {% for store in order_list %}
-        <a href="/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
+        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
             aria-current="true">
             <div class="ms-2 me-auto">
-                <strong>{{ store.Name }}</strong> - {{ store.Type }}
+                <a href="{{ url_for('store.get_store', id=store.Store.Id) }}"
+                    class="text-primary text-decoration-none"><strong>{{ store.Name }}</strong> - {{ store.Type
+                    }}</a>
             </div>
-            <span>{{ store.OrderAt|datetime }}</span>
-        </a>
+            <div><a href="/" class="text-primary text-decoration-none">{{ store.OrderAt|datetime }}</a></div>
+        </li>
         {% endfor %}
     </ul>
 </div>
-<div class="card border-primary my-3">
+<div class="card border-warning my-3">
     <div class="card-header">자주 방문한 매장 TOP 5</div>
     <ul class="list-group list-group-flush">
         {% for top in store_top5 %}
         <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
             aria-current="true">
             <div class="ms-2 me-auto">
-                <strong>{{ top.Name }}</strong> - {{ top.Type }}
+                <a href="{{ url_for('store.get_store', id=top.Store.Id) }}"
+                    class="text-primary text-decoration-none"><strong>{{ top.Name }}</strong> - {{ top.Type
+                    }}</a>
             </div>
             <span>{{ top.visit_count }}회 방문</span>
         </li>
         {% endfor %}
     </ul>
 </div>
-<div class="card border-primary my-3">
+<div class="card border-warning my-3">
     <div class="card-header">자주 주문한 상품 TOP 5</div>
     <ul class="list-group list-group-flush">
         {% for top in item_top5 %}
         <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
             aria-current="true">
             <div class="ms-2 me-auto">
-                <strong>{{ top.Name }}</strong> - {{ top.Type }}
+                <a href="{{ url_for('item.get_item', id=top.Item.Id) }}"
+                    class="text-primary text-decoration-none"><strong>{{ top.Name }}</strong> - {{ top.Type
+                    }}</a>
             </div>
             <span>{{ top.order_count }}회 주문</span>
         </li>

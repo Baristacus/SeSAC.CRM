@@ -55,22 +55,22 @@ def get_user(id):
         .all()
     )
 
-    store_top5 = (
-        Store.query.join(Order, Store.Id == Order.StoreId)
-        .add_columns(Store.Name, Store.Type)
-        .filter(Order.UserId == id)
-        .group_by(Store.Id)
-        .order_by(func.count().desc())
-        .limit(5)
-    )
+    # store_top5 = (
+    #     Store.query.join(Order, Store.Id == Order.StoreId)
+    #     .add_columns(Store.Name, Store.Type)
+    #     .filter(Order.UserId == id)
+    #     .group_by(Store.Id)
+    #     .order_by(func.count().desc())
+    #     .limit(5)
+    # )
 
-    visited_count = (
-        Order.query.filter(Order.UserId == id)
-        .add_columns(Order.StoreId, func.count())
-        .group_by(Order.StoreId)
-        .order_by(func.count().desc())
-        .all()
-    )
+    # visited_count = (
+    #     Order.query.filter(Order.UserId == id)
+    #     .add_columns(Order.StoreId, func.count())
+    #     .group_by(Order.StoreId)
+    #     .order_by(func.count().desc())
+    #     .all()
+    # )
 
     # 자주 방문한 매장 TOP5
 
