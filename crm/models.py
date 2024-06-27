@@ -5,7 +5,7 @@ class User(db.Model):
     Id = db.Column(db.Text, primary_key=True)
     Name = db.Column(db.Text, nullable=False)
     Gender = db.Column(db.Text, nullable=False)
-    Birthday = db.Column(db.Text, nullable=False)
+    Birthday = db.Column(db.Date, nullable=False)
     Age = db.Column(db.Integer, nullable=False)
     Address = db.Column(db.Text, nullable=False)
 
@@ -35,7 +35,7 @@ class Item(db.Model):
 
 class Order(db.Model):
     Id = db.Column(db.Text, primary_key=True)
-    OrderAt = db.Column(db.Text, nullable=False)
+    OrderAt = db.Column(db.DateTime, nullable=False)
     StoreId = db.Column(db.Text, nullable=False)
     UserId = db.Column(db.Text, nullable=False)
 

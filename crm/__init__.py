@@ -24,13 +24,11 @@ def create_app():
     app.register_blueprint(order.bp)
     app.register_blueprint(orderitem.bp)
 
-    def format_date(value):
-        value = datetime.strptime(value, "%Y-%m-%d")
-        return value.strftime("%Y년 %m월 %d일")
+    def format_datetime(value, fmt="%Y년 %m월 %d일 %H시 %M분 %S초"):
+        return value.strftime(fmt)
 
-    def format_datetime(value):
-        value = datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
-        return value.strftime("%Y년 %m월 %d일 %H시 %M분 %S초")
+    def format_date(value, fmt="%Y년 %m월 %d일"):
+        return value.strftime(fmt)
 
     app.jinja_env.filters["date"] = format_date
     app.jinja_env.filters["datetime"] = format_datetime
