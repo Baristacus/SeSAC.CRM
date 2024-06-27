@@ -15,7 +15,7 @@ def get_orderitems():
 
     return render_template(
         "orderitem/orderitem_list.jinja2",
-        title="주문 상세 내역",
+        title="전체 주문 내역",
         orderitem_list=orderitem_list,
         orderitem_total=orderitem_total,
     )

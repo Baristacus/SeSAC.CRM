@@ -39,14 +39,19 @@ def get_order(id):
     order_detail = (
         Order.query.join(OrderItem, Order.Id == OrderItem.OrderId)
         .join(Item, OrderItem.ItemId == Item.Id)
-        .add_columns(Item.Name, Item.UnitPrice)
+        .add_columns(Item.Id, Item.Name, Item.UnitPrice)
         .filter(Order.Id == id)
         .all()
     )
+
+    store = Store.query.get(order.StoreId)
+    user = User.query.get(order.UserId)
 
     return render_template(
         "order/order_detail.jinja2",
         title="주문 상세 정보",
         order=order,
         order_detail=order_detail,
+        store=store,
+        user=user,
     )
