@@ -44,10 +44,24 @@ def get_item(id):
     )
 
     # 월간 매출액 그래프
+    chart_month = []
+    for sale in sales:
+        chart_month.append(sale.Month)
+
+    chart_sales = []
+    for sale in sales:
+        chart_sales.append(sale.MonthlySales)
+
+    chart_sales_count = []
+    for sale in sales:
+        chart_sales_count.append(sale.OrderCount)
 
     return render_template(
         "item/item_detail.jinja2",
         title="상품 상세 정보",
         item=item,
         sales=sales,
+        chart_month=chart_month,
+        chart_sales=chart_sales,
+        chart_sales_count=chart_sales_count,
     )

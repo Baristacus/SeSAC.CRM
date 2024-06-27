@@ -47,6 +47,10 @@ def get_order(id):
     store = Store.query.get(order.StoreId)
     user = User.query.get(order.UserId)
 
+    total_price = sum([item.UnitPrice for item in order_detail])
+
+    print(total_price)
+
     return render_template(
         "order/order_detail.jinja2",
         title="주문 상세 정보",
@@ -54,4 +58,5 @@ def get_order(id):
         order_detail=order_detail,
         store=store,
         user=user,
+        total_price=total_price,
     )

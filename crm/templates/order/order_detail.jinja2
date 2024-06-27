@@ -25,6 +25,10 @@
                 <a href="{{ url_for('user.get_user', id=user.Id) }}" class="text-decoration-none text-primary">{{
                     user.Name }}</a>
             </dd>
+            <dt class="col-sm-2">총 주문금액</dt>
+            <dd class="col-sm-10">
+                ₩ {{ '{:,}'.format(total_price) }}
+            </dd>
         </dl>
     </div>
 </div>

@@ -46,6 +46,19 @@ def get_store(id):
 
     total_sales = sum([sale.MonthlySales for sale in sales])
 
+    # ! 월간 매출액 그래프
+    chart_month = []
+    for sale in sales:
+        chart_month.append(sale.Month)
+
+    chart_sales = []
+    for sale in sales:
+        chart_sales.append(sale.MonthlySales)
+
+    chart_sales_count = []
+    for sale in sales:
+        chart_sales_count.append(sale.OrderCount)
+
     # ! 단골 고객 가져오기
 
     vip_users = (
@@ -65,4 +78,7 @@ def get_store(id):
         sales=sales,
         total_sales=total_sales,
         vip_users=vip_users,
+        chart_month=chart_month,
+        chart_sales=chart_sales,
+        chart_sales_count=chart_sales_count,
     )
