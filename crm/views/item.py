@@ -13,11 +13,20 @@ def get_items():
     item_list = Item.query.paginate(page=page, per_page=per_page)
     item_total = Item.query.count()
 
+    name = request.args.get("name")
+
+    if name:
+        item_list = Item.query.filter(Item.Name.like(f"%{name}%")).paginate(
+            page=page, per_page=per_page
+        )
+        item_total = Item.query.filter(Item.Name.like(f"%{name}%")).count()
+
     return render_template(
         "item/item_list.jinja2",
         title="전체 상품 목록",
         item_list=item_list,
         item_total=item_total,
+        name=name,
     )
 
 

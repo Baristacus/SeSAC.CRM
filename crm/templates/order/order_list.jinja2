@@ -3,7 +3,7 @@
 <h1>전체 주문 내역</h1>
 <hr>
 <div class="card my-3">
-    <div class="card-header">총 주문: {{ order_total }}개</div>
+    <div class="card-header">총 주문: {{ '{:,}'.format(order_total) }}개</div>
     <ul class="list-group list-group-flush">
         {% for orders in order_list %}
         <a href="{{ url_for('order.get_order', id=orders.Id) }}"

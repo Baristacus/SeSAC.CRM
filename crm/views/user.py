@@ -21,14 +21,17 @@ def get_users():
         user_list = User.query.filter(User.Name.like(f"%{name}%")).paginate(
             page=page, per_page=per_page
         )
+        user_total = User.query.filter(User.Name.like(f"%{name}%")).count()
     if gender:
         user_list = User.query.filter(User.Gender == gender).paginate(
             page=page, per_page=per_page
         )
+        user_total = User.query.filter(User.Gender == gender).count()
     if age:
         user_list = User.query.filter(User.Age == age).paginate(
             page=page, per_page=per_page
         )
+        user_total = User.query.filter(User.Age == age).count()
 
     return render_template(
         "user/user_list.jinja2",

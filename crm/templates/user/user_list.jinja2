@@ -17,16 +17,16 @@
             <option>여</option>
         </select>
     </div>
-    <div class="col-1 text-center">
+    <div class="col-auto text-center">
         <button type="submit" class="btn btn-primary px-3">검색</button>
     </div>
-    <div class="col-1 text-center">
+    <div class="col-auto text-center">
         <a href="{{ url_for('user.get_users') }}" class="btn btn-danger px-3">초기화</a>
     </div>
 </form>
 <hr />
 <div class="card my-3">
-    <div class="card-header">총 회원: {{ user_total }}명</div>
+    <div class="card-header">총 회원: {{ '{:,}'.format(user_total) }}명</div>
     <ul class="list-group list-group-flush">
         {% for users in user_list %}
         <a href="{{ url_for('user.get_user', id=users.Id) }}"

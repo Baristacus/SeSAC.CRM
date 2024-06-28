@@ -2,8 +2,20 @@
 {% block content %}
 <h1>전체 상점 리스트</h1>
 <hr>
+<form action='{{ url_for("store.get_stores") }}' class="row g-3 justify-content-center">
+    <div class="col-4">
+        <input type="text" class="form-control" id="name" name="name" placeholder="{{ name or '매장명 검색' }}" />
+    </div>
+    <div class="col-auto text-center">
+        <button type="submit" class="btn btn-primary px-3">검색</button>
+    </div>
+    <div class="col-auto text-center">
+        <a href="{{ url_for('store.get_stores') }}" class="btn btn-danger px-3">초기화</a>
+    </div>
+</form>
+<hr>
 <div class="card my-3">
-    <div class="card-header">총 상점: {{ store_total }}개</div>
+    <div class="card-header">총 상점: {{ '{:,}'.format(store_total) }}개</div>
     <ul class="list-group list-group-flush">
         {% for stores in store_list %}
         <a href="{{ url_for('store.get_store', id=stores.Id) }}"

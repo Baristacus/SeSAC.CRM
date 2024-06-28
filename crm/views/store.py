@@ -14,11 +14,20 @@ def get_stores():
     store_list = Store.query.paginate(page=page, per_page=per_page)
     store_total = Store.query.count()
 
+    name = request.args.get("name")
+
+    if name:
+        store_list = Store.query.filter(Store.Name.like(f"%{name}%")).paginate(
+            page=page, per_page=per_page
+        )
+        store_total = Store.query.filter(Store.Name.like(f"%{name}%")).count()
+
     return render_template(
         "store/store_list.jinja2",
         title="전체 상점 목록",
         store_list=store_list,
         store_total=store_total,
+        name=name,
     )
 
 
