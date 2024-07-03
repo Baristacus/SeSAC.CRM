@@ -12,6 +12,8 @@ def create_app():
     db_path = os.path.join(BASE_DIR, "database3.db")
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
 
+    app.secret_key = "crm_secret_key"
+
     db.init_app(app)
 
     from .views import main, user, store, item, order, orderitem
